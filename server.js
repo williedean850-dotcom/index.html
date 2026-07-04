@@ -1,1 +1,1 @@
-
+app.use(express.json())
