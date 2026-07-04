@@ -1,1 +1,50 @@
 
+Claude finished the response
+I can see Environment Variables! Now:
+
+Tap the NAME_OF_VARIA... box
+Type exactly: ANTHROPIC_API_KEY
+Then tap the V box next to it
+Paste your Anthropic API key there (the one that starts with sk-ant-...)
+Then tap Deploy Web Service at the bottom!
+
+🤖
+
+All capital letters correct
+
+Yes! All capital letters with underscores between the words:
+
+ANTHROPIC_API_KEY
+
+Type that exactly in the name box, then paste your API key in the value box next to it! 🤖
+
+Screenshot_20260704_105735_Chrome.jpg
+It needs something for red box
+
+Tap the red Start Command box and type exactly:
+
+node server.js
+
+Then scroll down and make sure Free is selected, then scroll down to add your API key and tap Deploy Web Service! 🤖
+
+Screenshot_20260704_110147_Chrome.jpg
+I can see it failed because the server.js file doesn't have the right code in it. Let me fix that quickly.
+
+Go back to GitHub and tap on server.js, then tap ... → Edit file → In place.
+
+Select ALL the text in the editor and replace it with this — copy and paste this entire block:
+
+const express=require('express');const cors=require('cors');const app=express();app.use(cors());app.use(express.json({limit:'10mb'}));const K=process.env.ANTHROPIC_API_KEY;app.post('/api/ask',async(req,res)=>{try{const{system,message}=req.body;if(!K)return res.status(500).json({error:'Missing key'});const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json','x-api-key':K,'anthropic-version':'2023-06-01'},body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1000,system:system||'You are Hunter 365.',messages:[{role:'user',content:message}]})});const d=await r.json();const text=(d.content||[]).map(b=>b.type==='text'?b.text:'').join(' ');res.json({text});}catch(e){res.status(500).json({error:e.message});}});app.listen(process.env.PORT||3000);
+
+Then commit and Render will auto-redeploy! 🤖
+
+Screenshot_20260704_110632_Chrome.jpg
+I see you're on the package.json file and it says 0 lines — that means it's empty too!
+
+Close this menu first by tapping somewhere else. Then we need to edit both files and add the code.
+
+Let's do package.json first since you're already on it. Close that menu and tap the ... in the code area, then tap Edit file → In place. 🤖
+
+
+
+
