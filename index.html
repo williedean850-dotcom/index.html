@@ -152,7 +152,7 @@ async function ask(t){
   if(btn)btn.disabled=true;
   loading(out);
   try{
-    var r=await fetch("/api/ask",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:1000,system:T[t].s,user:txt})});
+    var r=await fetch("/api/ask",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"gpt-3.5-turbo",max_tokens:1000,system:T[t].s,user:txt})});
     var d=await r.json();
     if(!r.ok)throw new Error("Error "+r.status);
     var ans=(d.content||[]).map(function(b){return b.type==="text"?b.text:"";}).filter(Boolean).join(" ");
@@ -174,7 +174,7 @@ async function askPhoto(){
   rd.onload=async function(e){
     try{
       var b=e.target.result.split(",")[1];var mt=f.type||"image/jpeg";
-      var r=await fetch("/api/ask",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-6",max_tokens:1000,system:"You are Hunter 365. Analyze this photo and answer the user's question clearly and helpfully. Keep it around 150 words.",user:q,photo_b64:b,photo_mime:mt})});
+      var r=await fetch("/api/ask",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"gpt-4-vision-preview",max_tokens:1000,system:"You are Hunter 365. Analyze this photo and answer the user's question clearly and helpfully. Keep it around 150 words.",user:q,photo_b64:b,photo_mime:mt})});
       var d=await r.json();
       if(!r.ok)throw new Error("Error "+r.status);
       var ans=(d.content||[]).map(function(x){return x.type==="text"?x.text:"";}).filter(Boolean).join(" ");
