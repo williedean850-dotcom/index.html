@@ -51,7 +51,7 @@ textarea:focus{outline:none;border-color:var(--red);} .abtn{width:100%;padding:1
 <div id="home" class="pg on">
   <div class="hero">
     <div class="av"><img src="hunter365.jpg" alt="Hunter"></div>
-    <h1>Hunter <span>365</span></h1>
+    <div class="av"><img src="hunter365.jpg" alt="hunter"></div>
     <p class="tag">Your AI-powered digital helper.</p>
     <div class="pill">Hunter is online</div><br>
     <button class="ibtn" onclick="openIntro()">&#9654; Watch Hunter Intro</button>
@@ -261,11 +261,36 @@ generateButton.addEventListener("click", async (e) => {
         } catch (err) {
             alert("Failed to communicate with Hunter's design engine.");
         }
-    }
+            }
 });
+
+// ==========================================
+// 3. VIDEO CONTROLLER & REVERT LOGIC
+// ==========================================
+const introVideo = document.getElementById("hunter-intro-vid");
+const profileImage = document.getElementById("hunter-profile-img");
+
+// This function runs automatically whenever you tap your "Watch Hunter" button
+function openIntro() {
+    if (introVideo && profileImage) {
+        profileImage.style.display = "none";  // Temporarily hide the picture
+        introVideo.style.display = "block";   // Show the video layer
+        introVideo.currentTime = 0;           // Start video from the absolute beginning
+        introVideo.play().catch(err => console.log("Playback error:", err));
+    }
+}
+
+// Automatically switch back to his permanent image the exact second the video finishes
+if (introVideo && profileImage) {
+    introVideo.addEventListener("ended", () => {
+        introVideo.style.display = "none";     // Hide the video
+        profileImage.style.display = "block";  // Put the circular photo right back
+    });
+}
 </script>
 </body>
 </html>
+ 
 
 
 
