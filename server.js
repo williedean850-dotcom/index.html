@@ -46,37 +46,4 @@ app.post('/api/ask', async (req, res) => {
 
     const r = await fetch(url, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(body)
-    });
-
-    const data = await r.json();
-    if (!r.ok) {
-      console.error('Gemini error:', data);
-      return res.status(r.status).json(data);
-    }
-
-    const assistantText = (data.candidates &&
-      data.candidates[0] &&
-      data.candidates[0].content &&
-      data.candidates[0].content.parts &&
-      data.candidates[0].content.parts[0] &&
-      data.candidates[0].content.parts[0].text) || '';
-
-    // Return in the same shape the frontend expects: { content: [{type:'text', text: '...'}] }
-    return res.json({ content: [{ type: 'text', text: assistantText }], raw: data });
-  } catch (err) {
-    console.error('Server error in /api/ask:', err);
-    return res.status(500).json({ error: String(err) });
-  }
-});
-
-// Serve static files from the repo root so the same Render service can host frontend + proxy
-app.use(express.static(path.join(__dirname)));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'index.html'));
-});
-
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server listening on port ${PORT}`));
+      headers: { 'Content-Type': 
