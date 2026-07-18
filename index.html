@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+m<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -173,6 +173,7 @@ async function ask(t){
     if(!r.ok)throw new Error("Error "+r.status);
     var ans=(d.content||[]).map(function(b){return b.type==="text"?b.text:"";}).filter(Boolean).join(" ");
     out.innerHTML="<span class='lbl'>Hunter says</span>"+esc(ans||"No answer. Try again.");
+    speak(ans);
   }catch(e){out.innerHTML="<span class='lbl'>Error</span>"+esc(String(e))+" Try again in a moment.";}
   if(btn)btn.disabled=false;
 }
