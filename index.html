@@ -238,6 +238,15 @@ function saveUp(){var t=document.getElementById("upgradeI").value.trim();var o=d
   var el=document.getElementById(pair[0]);if(!el)return;
   (T[pair[1]].ch||[]).forEach(function(c){var b=document.createElement("button");b.className="chip";b.textContent=c;b.onclick=function(){document.getElementById(pair[1]+"I").value=c;};el.appendChild(b);});
 });
+  function speak(text){
+  if(!window.speechSynthesis)return;
+  window.speechSynthesis.cancel();
+  var u=new SpeechSynthesisUtterance(text);
+  var heroImg=document.querySelector(".hero img,.logo");
+  u.onstart=function(){if(heroImg)heroImg.classList.add("talking-glow");};
+  u.onend=function(){if(heroImg)heroImg.classList.remove("talking-glow");};
+  window.speechSynthesis.speak(u);
+}
 </script>
 </body>
 </html>
