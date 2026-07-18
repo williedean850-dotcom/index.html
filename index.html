@@ -165,7 +165,10 @@ async function ask(t){
   if(btn)btn.disabled=true;
   loading(out);
   try{
-  var r=await fetch("http://hunter365-ixi3.onrender.com/api/ask",{method:"post";headers:{"content-type""application/json"},body:JSON.srringify({system:T[+].s+do not use asterisks,bold text,or any markdown symbols in your answer.plane text only.,"user:txt:})});
+  var r=await fetch("https://hunter365-ixi3.onrender.com/api/ask",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({system:T[t].s+"do not use asterisks,bold text,or any markdown symbols in your answer.Plain text only."user:text})});
+
+
+    
     var d=await r.json();
     if(!r.ok)throw new Error("Error "+r.status);
     var ans=(d.content||[]).map(function(b){return b.type==="text"?b.text:"";}).filter(Boolean).join(" ");
