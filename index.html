@@ -165,7 +165,7 @@ async function ask(t){
   if(btn)btn.disabled=true;
   loading(out);
   try{
-  var r=await fetch("https://hunter365-ixi3.onrender.com/api/ask",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({system:T[t].s+"do not use asterisks,bold text,or any markdown symbols in your answer.Plain text only."user:text})});
+  var r=await fetch("https://hunter365-ixi3.onrender.com/api/ask",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({system:T[t].s+" Do not use asterisks, bold text, or any markdown symbols in your answer. Plain text only.",user:txt})});
 
 
     
